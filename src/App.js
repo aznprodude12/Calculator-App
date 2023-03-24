@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 function App() {
   const [ calc, setCalc ] = useState("");
+  const [ result, setResult ] = useState("");
 
   const ops = ['/', '*', '+', '-', '.'];
 
@@ -13,6 +14,11 @@ function App() {
         return;
       }
     setCalc(calc + value);
+
+    // automatically calculates the result while updating the calculations
+    if (!ops.includes(value)) {
+      setResult(eval(calc + value).toString());
+    }
   }
 
   const createDigits = () => {
@@ -35,7 +41,7 @@ function App() {
     <div className="App">
       <div className="calculator">
         <div className="display">
-          <span>(0)</span>&nbsp;
+          { result ? <span>({result})</span> : '' }&nbsp;
           { calc || "0" }
         </div>
         <div className="operators">
