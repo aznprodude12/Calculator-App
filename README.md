@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Calculator App Built with React JS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was built to calculate simple mathematical operations: +, -, /, *
 
-## Available Scripts
+It will automatically perform the calculations as you add more digits/operators into the calculation or you can press the '=' button to manually perform the calculations.
 
-In the project directory, you can run:
+## Demo
 
-### `npm start`
+Check it out here: [https://hoaho-calculator-app.netlify.app/](https://hoaho-calculator-app.netlify.app/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Functions Explained
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `updateCalc()`
 
-### `npm test`
+This function takes a single argument value, which represents the user's input (e.g. a digit, operator, or decimal point).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+It first checks if the value is an operator (e.g. +, -, *, /) and if the current calc state is empty or if the last character of calc is also an operator. If either of these conditions is true, the function returns early and does not update the display or calculate the result.
 
-### `npm run build`
+If the value is not an operator, it appends it to the current calc state using the setCalc function, which updates the calculator's display.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Finally, if the value is not an operator, the function evaluates the updated calc state plus the value using the eval function, which calculates the result of the expression as a string, and then converts it to a string using the toString function. The result is then updated using the setResult function, which updates the display of the calculator's result.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `calculate()`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This function calculates the result of a mathematical expression entered by the user in the calculator.
 
-### `npm run eject`
+The function uses the eval() function to evaluate the current value of the calc state, which represents the mathematical expression entered by the user. The result of the evaluation is returned as a number.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The result is then converted to a string using the toString() function and is set as the new value of the calc state using the setCalc() function. This updates the display of the calculator with the new result.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `deleteLast()`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This function deletes the last character of the current value of the calc state in the calculator.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The function first checks if the current value of the calc state is empty. If it is, the function returns early and does not perform any further actions.
 
-## Learn More
+If the calc state is not empty, the function uses the slice() method to create a new string that consists of all characters of the calc state except for the last one. 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The slice() method takes two arguments: the starting index, which is 0 in this case, and the ending index, which is -1. The -1 ending index means that the last character of the string is excluded from the new string.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The new string is then set as the new value of the calc state using the setCalc() function, which updates the display of the calculator with the new value.
 
-### Code Splitting
+Overall, this function allows the user to delete the last character of the input in case they make a mistake while entering a mathematical expression.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### `createDigits()`
 
-### Analyzing the Bundle Size
+This function generates an array of JSX elements representing buttons for the digits 1 through 9 on the calculator.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The function initializes an empty array called digits and then uses a for loop to iterate over the numbers 1 through 9. For each number, the function creates a button element with the number as its label and an onClick event handler that calls the updateCalc() function with the number as a string argument.
 
-### Making a Progressive Web App
+The key attribute is also set to the current number i to ensure that each button element has a unique identifier.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Once all buttons have been generated for the digits 1 through 9, the function returns the digits array.
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Overall, this function simplifies the process of creating buttons for the digits on the calculator by generating the necessary JSX elements dynamically with a loop, rather than having to manually create each button element individually.
