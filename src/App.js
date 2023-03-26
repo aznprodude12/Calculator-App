@@ -6,6 +6,7 @@ function App() {
 
   const ops = ['/', '*', '+', '-', '.'];
 
+  // Updates calculations for display
   const updateCalc = value => {
     if (
       ops.includes(value) && calc === '' ||
@@ -21,10 +22,12 @@ function App() {
     }
   }
 
+  // Calculates the results when pressing "=" button
   const calculate = () => {
     setCalc(eval(calc).toString());
   }
 
+  // Delete the last digit or operators in the calculation
   const deleteLast = () => {
     if (calc == '') {
       return;
@@ -35,6 +38,7 @@ function App() {
     setCalc(value);
   }
 
+  // Dynamically add the digits buttons
   const createDigits = () => {
     const digits = [];
 
